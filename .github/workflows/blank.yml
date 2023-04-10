@@ -47,5 +47,5 @@ jobs:
         aws-region: eu-central-1
 
     - name: Print assumed role
-        run: aws s3 ls
+      run: aws s3 ls
         
