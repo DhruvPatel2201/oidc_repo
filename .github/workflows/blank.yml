@@ -10,7 +10,8 @@ on:
     branches: [ "main" ]
 
 permissions:
-  contents: read
+  id-token: write
+  contents: read  
 
 jobs:
   build:
@@ -37,4 +38,14 @@ jobs:
     - name: Test with pytest
       run: |
         python tests.py
+        
+    - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::492538659766:role/OIDC-gitaction-role
+          role-session-name: samplerolesession
+          aws-region: eu-central-1
+
+    - name: Print assumed role
+        run: aws s3 ls
         
